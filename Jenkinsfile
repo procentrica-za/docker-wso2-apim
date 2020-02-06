@@ -17,7 +17,7 @@ node {
 
     stage('Push image') {
         docker.withRegistry('https://registry.hub.docker.com', 'jenkinsprocentrica_dockerhub') {
-            app.push("2.6.0-${env.BUILD_NUMBER}")
+            app.push("2.6.0")
             app.push("latest")
         }
     }
