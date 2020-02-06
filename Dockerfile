@@ -21,3 +21,16 @@ RUN curl -sSLk https://git.io/get-mo -o mo \
     && mv mo /bin 
 
 USER ${USER_ID}
+
+# Add Libraries
+COPY --chown=wso2carbon:wso2 dist/lib ${WSO2_SERVER_HOME}/repoistory/components/lib/
+ADD --chown=wso2carbon:wso2 https://repo1.maven.org/maven2/org/postgresql/postgresql/42.2.9/postgresql-42.2.9.jar ${WSO2_SERVER_HOME}/repository/components/lib/
+
+# Add Dropins
+COPY --chown=wso2carbon:wso2 dist/dropins ${WSO2_SERVER_HOME}/repoistory/components/dropins/
+
+# Add All custom config files
+COPY --chown=wso2carbon:wso2 config/conf ${WSO2_SERVER_HOME}/repoistory/conf
+
+# Add Mustache Templates
+COPY --chown=wso2carbon:wso2 config/templates ${WSO2_SERVER_HOME}/templates
