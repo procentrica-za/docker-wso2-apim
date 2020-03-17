@@ -14,7 +14,14 @@ ARG WSO2_SERVER_VERSION=2.6.0
 ARG WSO2_SERVER_PACK=${WSO2_SERVER}-${WSO2_SERVER_VERSION}
 ARG WSO2_SERVER_HOME=${USER_HOME}/${WSO2_SERVER_PACK}
 
+#Set default environment variables - These can be overwritten on container creation
+ENV WSO2_DOCKER=false
+ENV AUTHORIZATION_SERVER=localhost:9443
+
 USER root
+
+# copy init script to user home
+COPY --chown=wso2carbon:wso2 entrypoint.sh ${USER_HOME}/
 
 RUN curl -sSLk https://git.io/get-mo -o mo \
     && chmod +x mo \
@@ -34,3 +41,9 @@ COPY --chown=wso2carbon:wso2 config/conf ${WSO2_SERVER_HOME}/repository/conf
 
 # Add Mustache Templates
 COPY --chown=wso2carbon:wso2 config/templates ${WSO2_SERVER_HOME}/templates
+
+# expose ports
+EXPOSE 9763 9443 9999 11111 8280 8243 5672 9711 9611 7711 7611 10397 9099
+
+# initiate container and start WSO2 Carbon server
+ENTRYPOINT ["/home/wso2carbon/entrypoint.sh"]
