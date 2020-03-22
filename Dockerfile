@@ -17,6 +17,7 @@ ARG WSO2_SERVER_HOME=${USER_HOME}/${WSO2_SERVER_PACK}
 #Set default environment variables - These can be overwritten on container creation
 ENV WSO2_DOCKER=false
 ENV AUTHORIZATION_SERVER=localhost:9443
+ENV REVERSE_PROXY_ENABLED=false
 
 USER root
 
