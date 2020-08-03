@@ -62,9 +62,9 @@
   "reverseProxy" : {
     "enabled" : {{REVERSE_PROXY_ENABLED}},    // values true , false , "auto" - will look for  X-Forwarded-* headers
     "host" : "{{STORE_DOMAIN}}", // If reverse proxy do not have a domain name use IP
-    "context":""
+    "context":"{{STORE_CONTEXT}}"
     //"regContext":"" // Use only if different path is used for registry
-  },
+  }
   "mapExistingAuthApps" : false,
   "whiteListedHostNames" : ["localhost"]
 }
